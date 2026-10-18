@@ -1,0 +1,13 @@
+round,state,sysbench_e_per_s,pkg_w,pkg_max_mdegC
+1,active-locked,8040.67,10.1183,47000
+1,quiet-locked,7910.65,9.9516,58000
+1,active-unlimited,12986.76,27.0746,84000
+1,quiet-unlimited,13153.37,25.6301,84000
+2,quiet-unlimited,13170.20,25.5347,85000
+2,active-unlimited,13187.68,24.8479,79000
+2,quiet-locked,8272.17,9.9532,60000
+2,active-locked,8310.93,9.9561,50000
+3,active-locked,8323.55,9.9477,48000
+3,quiet-locked,8295.58,9.9555,57000
+3,active-unlimited,13070.16,26.3192,79000
+3,quiet-unlimited,13086.71,27.4829,88000

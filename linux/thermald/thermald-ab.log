@@ -1,0 +1,8 @@
+==== 2026-10-16T22:08:52+08:00  boot capture ====
+thermald_active_before = inactive
+PRE : CEFM=0x0 EPLE=0x1  EPP=balance_performance no_turbo=0
+PRE : idle_pkg_W=3.09
+thermald_active_after  = active
+POST: CEFM=0x0 EPLE=0x0  EPP=balance_performance no_turbo=0
+POST: idle_pkg_W=0.48
+

@@ -1,0 +1,49 @@
+Windows registry ACPI dump vs pre-Windows Linux dump
+
+windows                            linux                          size      sha256 match
+------------------------------------------------------------------------------------------------
+DSDT_01_CFSV1-2.bin                DSDT                           337881    YES
+FACP_01_CFSV1-2.bin                FACP                           276       YES
+FACS_01_unknown.bin                FACS                           64        YES
+SSDT_01_DptfTabl.bin               SSDT2                          23954     YES
+SSDT_02_Ther_Rvp.bin               SSDT3                          2472      YES
+SSDT_03_OEM_Rtd3.bin               SSDT4                          5674      YES
+SSDT_04_PtidDevc.bin               SSDT5                          10016     YES
+SSDT_05_TbtTypeC.bin               SSDT6                          298       YES
+SSDT_06_UsbCTabl.bin               SSDT7                          2437      YES
+SSDT_07_SaSsdt.bin                 SSDT8                          11789     YES
+SSDT_08_IgfxSsdt.bin               SSDT9                          13312     YES
+SSDT_09_TcssSsdt.bin               SSDT10                         45690     YES
+SSDT_10_xh_tudd4.bin               SSDT11                         4410      YES
+SSDT_11_ADebTabl.bin               SSDT12                         324       YES
+SSDT_12_CpuSsdt.bin                SSDT1                          9565      YES
+XSDT_01_CFSV1-2.bin                -                              284       no exact match
+
+Windows tables: 16, exact sha matches with Linux: 15
+Linux-only (runtime/dynamic SSDTs, not in firmware registry):
+  APIC                                     300 bytes
+  ASF!                                     105 bytes
+  BGRT                                     56 bytes
+  DBG2                                     92 bytes
+  DBGP                                     52 bytes
+  DMAR                                     160 bytes
+  FIDT                                     156 bytes
+  FPDT                                     68 bytes
+  HPET                                     56 bytes
+  LPIT                                     204 bytes
+  MCFG                                     60 bytes
+  MSDM                                     85 bytes
+  NHLT                                     6996 bytes
+  PTDT                                     3396 bytes
+  TCPA                                     50 bytes
+  TPM2                                     76 bytes
+  UEFI                                     72 bytes
+  WSMT                                     40 bytes
+  dynamic\SSDT13                           916 bytes
+  dynamic\SSDT14                           1541 bytes
+  dynamic\SSDT15                           459 bytes
+  dynamic\SSDT16                           651 bytes
+  dynamic\SSDT17                           2279 bytes
+  dynamic\SSDT18                           1162 bytes
+  dynamic\SSDT19                           1236 bytes
+  dynamic\SSDT20                           1162 bytes

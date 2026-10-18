@@ -1,0 +1,21 @@
+Windows ACPI table dump from HKLM\HARDWARE\ACPI
+host: <redacted>
+
+time: 2026-10-18T12:25:09.545246+08:00
+
+DSDT_01_CFSV1-2.bin                      337881  612f8da5da0cf3d5a5cfacf316bdce4d869ccba4841cedf96ef77bb26691878f  MATBIO/CFSV1-2
+FACP_01_CFSV1-2.bin                         276  b80c2a982c17bdb0e2071c558e51587e0d568fc2f8fcbb07895297a3f6d6a5b0  MATBIO/CFSV1-2
+FACS_01_unknown.bin                          64  611f88e4f4f4303ec880e1d1a6d83491c67529def84e835d877f9bea56fa0c2a  /
+SSDT_01_DptfTabl.bin                      23954  f0d92acff1f43c29c7921ebeb6951375f21d5fc554e7070426c6b9e8f62f5f61  DptfTb/DptfTabl
+SSDT_02_Ther_Rvp.bin                       2472  ad0522f2d2b4865ae275bd00badec5cd00ba2c8fe483221c209574d2d743f8de  MATBIO/Ther_Rvp
+SSDT_03_OEM_Rtd3.bin                       5674  4f9b09e372b4ab1f0c78e4a209971d53754a61f9411b5b75ef72e964cf764f9a  MATBIO/OEM_Rtd3
+SSDT_04_PtidDevc.bin                      10016  23e3d820b181e47a4f2a61ab25077cf9fa8884f9a3de7fca9a0917c54746442e  MATBIO/PtidDevc
+SSDT_05_TbtTypeC.bin                        298  55b0e7d9d3ea7689cab775685e07faf9197614bdfeffb1ed8727702ba065514c  MATBIO/TbtTypeC
+SSDT_06_UsbCTabl.bin                       2437  47cec36eb64fcc1ad1591caa06c584bc97c4220c98ac1ec233f0ac97a51bf37a  MATBIO/UsbCTabl
+SSDT_07_SaSsdt.bin                        11789  3367527cd271410c2b193ce1fb2db6a709ae35f2264decd4929cdcdfaf99dc3e  SaSsdt/SaSsdt
+SSDT_08_IgfxSsdt.bin                      13312  fa20d64a16618f5655c99f52066debd07ea99223f50b21a4abd60f3b46b0bd59  INTEL/IgfxSsdt
+SSDT_09_TcssSsdt.bin                      45690  e1696db7656732246182b287bb77e9e65d25282bd01d5cb95ef9a5542a7e6aba  INTEL/TcssSsdt
+SSDT_10_xh_tudd4.bin                       4410  9485d54b7e0355c89316396057c6fc4bb549f337fb419f5bdab14af699fdda47  INTEL/xh_tudd4
+SSDT_11_ADebTabl.bin                        324  a84d338ac3730ff6f3efa3f7c53fc7e97667b89ac2a0c2bb2869aa863f6e4dbd  Intel/ADebTabl
+SSDT_12_CpuSsdt.bin                        9565  1c7829a25a0f18a625d2a950dc7ef2474385589d86a1c798b0888e2012def813  CpuRef/CpuSsdt
+XSDT_01_CFSV1-2.bin                         284  25504d8654da49eb26739814ea28a098a307e58cc5164fe6950b808a6535a304  MATBIO/CFSV1-2

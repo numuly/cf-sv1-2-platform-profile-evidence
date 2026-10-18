@@ -1,0 +1,5 @@
+ctx pre: AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1
+    events per second:  8310.93
+    state: active-locked SEFM=0 SEPL=1 platform_profile=cool
+    MSR 0x610: PL1=28.0 PL2=60.0
+ctx post: AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1

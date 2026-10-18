@@ -1,0 +1,6 @@
+state=perf-quiet epp=0 fan=quiet
+start=2026-10-18T13:24:42.785639+08:00 end=2026-10-18T13:25:49.962453+08:00
+epp_registry=0 fan_cli=quiet battery_status=2
+msr610_pl1_w=28.0 msr610_pl2_w=60.0
+ec_pre={'fan79': 0, 'pl_ca': 159, 'pl_cb': 159, 'ee': 36}
+ec_post={'fan79': 0, 'pl_ca': 159, 'pl_cb': 159, 'ee': 36}

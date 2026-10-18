@@ -1,0 +1,113 @@
+﻿# Windows-side environment for the CF-SV1-2 comparison
+captured: 2026-10-18T13:02:20.4351731+08:00
+
+## System
+
+
+Manufacturer        : Panasonic Corporation
+Model               : CFSV1-2
+SystemFamily        : Let'snote/TOUGHBOOK
+TotalPhysicalMemory : 16808583168
+
+
+
+
+
+
+Manufacturer      : American Megatrends International, LLC.
+SMBIOSBIOSVersion : V2.00L24
+ReleaseDate       : 2026/8/27 8:00:00
+Version           : MATBIO - 1072009
+
+
+
+
+
+
+Name                      : 11th Gen Intel(R) Core(TM) i5-1145G7 @ 2.60GHz
+NumberOfCores             : 4
+NumberOfLogicalProcessors : 8
+MaxClockSpeed             : 2611
+
+
+
+
+
+
+Caption        : Microsoft Windows 11 专业版
+Version        : 10.0.26300
+BuildNumber    : 26300
+OSArchitecture : 64 位
+
+
+
+
+## Power
+电源方案 GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (平衡)
+
+
+
+ActiveOverlayAcPowerScheme : 00000000-0000-0000-0000-000000000000
+ActivePowerScheme          : 381b4222-f694-41f0-9685-ff5bb260df2e
+
+
+
+
+
+
+ACSettingIndex : 0
+
+
+
+
+
+
+Name                     : CF-VZSU1C
+BatteryStatus            : 2
+EstimatedChargeRemaining : 99
+
+
+
+
+## Panasonic
+
+
+FileVersion    : 4.11311.0.0
+ProductVersion : 4.11311.0.0
+
+
+
+
+fancontrol.mode :        quiet                                           
+
+## Tools
+PawnIO: 2.2.0
+LibreHardwareMonitor: 0.9.6.0
+iasl: 
+## EC baseline (PawnIO LpcACPIEC)
+00: 06 01 00 00 00 ce 0c ff 03 00 00 00 02 00 01 00
+10: 00 01 98 10 20 1c 7e 01 32 00 d4 0f 43 46 2d 56
+20: 5a 53 55 31 43 00 00 00 83 54 6e 07 4c 49 4f 4e
+30: 00 00 20 00 00 00 46 20 b5 0f 97 0f db 01 d4 0b
+40: 45 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+50: 00 00 ff ff 00 00 00 00 00 00 00 00 00 00 00 00
+60: 00 00 00 00 00 00 00 00 ff ff 00 00 ff ff ff ff
+70: ff ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+80: 72 0d 9a 0d c6 0e 88 10 3c 0c 9a 0d cc 0d 94 0e
+90: 00 00 41 60 1b 0c f0 0c f8 0e 5c 0f 00 00 01 00
+a0: 00 00 00 01 00 00 05 00 80 00 01 00 ff 00 00 ff
+b0: 11 00 00 00 0b 00 ff 00 00 80 00 00 03 00 00 00
+c0: 83 80 82 82 82 82 82 83 9f 9f 9f 9f 9f 9f 81 83
+d0: 9f 9f 9f 9f 9f 9f 82 82 81 9f 9f 9f 82 82 82 9f
+e0: 9f 82 9f 82 9f 9f 9f 83 63 00 63 00 00 e0 23 00
+f0: 21 52 11 00 52 5d 0d 03 97 01 00 13 20 00 80 00
+
+## MSR 0x610 (RAPL PL1/PL2)
+0x1A0: error read_msr 0x1a0 failed: 0x80070005
+0x610: 0x804281E000DD80E0
+0x770: error read_msr 0x770 failed: 0x80070005
+0x771: error read_msr 0x771 failed: 0x80070005
+0x772: error read_msr 0x772 failed: 0x80070005
+0x773: error read_msr 0x773 failed: 0x80070005
+0x774: error read_msr 0x774 failed: 0x80070005
+

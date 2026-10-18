@@ -1,0 +1,32 @@
+2026-10-16T21:05:47 START rounds=3 load=60s threads=8 EPP=performance no_turbo=0
+2026-10-16T21:05:47 MSR 0x610: PL1=28.0 W PL2=60.0 W
+2026-10-16T21:05:48 r1 active-locked: set SEFM=0 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1 platform_profile=cool
+2026-10-16T21:07:18   -> score=8040.7 e/s  pkg=10.12 W  pkg_max=47.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1
+2026-10-16T21:07:23 r1 quiet-locked: set SEFM=1 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1 platform_profile=quiet
+2026-10-16T21:08:53   -> score=7910.6 e/s  pkg=9.95 W  pkg_max=58.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1
+2026-10-16T21:11:54 r1 active-unlimited: set SEFM=0 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0 platform_profile=performance
+2026-10-16T21:13:24   -> score=12986.8 e/s  pkg=27.07 W  pkg_max=84.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0
+2026-10-16T21:14:50 r1 quiet-unlimited: set SEFM=1 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0 platform_profile=custom
+2026-10-16T21:16:20   -> score=13153.4 e/s  pkg=25.63 W  pkg_max=84.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0
+2026-10-16T21:18:21 r2 quiet-unlimited: set SEFM=1 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0 platform_profile=custom
+2026-10-16T21:19:51   -> score=13170.2 e/s  pkg=25.53 W  pkg_max=85.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0
+2026-10-16T21:22:22 r2 active-unlimited: set SEFM=0 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0 platform_profile=performance
+2026-10-16T21:23:52   -> score=13187.7 e/s  pkg=24.85 W  pkg_max=79.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0
+2026-10-16T21:24:23 r2 quiet-locked: set SEFM=1 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1 platform_profile=quiet
+2026-10-16T21:25:53   -> score=8272.2 e/s  pkg=9.95 W  pkg_max=60.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1
+2026-10-16T21:27:14 r2 active-locked: set SEFM=0 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1 platform_profile=cool
+2026-10-16T21:28:44   -> score=8310.9 e/s  pkg=9.96 W  pkg_max=50.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1
+2026-10-16T21:28:54 r3 active-locked: set SEFM=0 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1 platform_profile=cool
+2026-10-16T21:30:24   -> score=8323.5 e/s  pkg=9.95 W  pkg_max=48.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x1
+2026-10-16T21:30:35 r3 quiet-locked: set SEFM=1 SEPL=1 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1 platform_profile=quiet
+2026-10-16T21:32:05   -> score=8295.6 e/s  pkg=9.96 W  pkg_max=57.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x1
+2026-10-16T21:32:51 r3 active-unlimited: set SEFM=0 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0 platform_profile=performance
+2026-10-16T21:34:21   -> score=13070.2 e/s  pkg=26.32 W  pkg_max=79.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x0 EPLE=0x0
+2026-10-16T21:37:07 r3 quiet-unlimited: set SEFM=1 SEPL=0 -> AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0 platform_profile=custom
+2026-10-16T21:38:37   -> score=13086.7 e/s  pkg=27.48 W  pkg_max=88.0 C  post=AC=1 S0IX=Error: AE_NOT_FOUND PWRS=Error: AE_NOT_FOUND CEFM=0x1 EPLE=0x0
+2026-10-16T21:41:37 DONE — summary.csv written
+2026-10-16T21:41:37 per-state (median of rounds):
+2026-10-16T21:41:37   active-locked    e/s=  8310.9  pkg= 9.96 W  pkg_max=50.0 C
+2026-10-16T21:41:37   quiet-locked     e/s=  8272.2  pkg= 9.95 W  pkg_max=60.0 C
+2026-10-16T21:41:37   active-unlimited e/s= 13070.2  pkg=26.32 W  pkg_max=84.0 C
+2026-10-16T21:41:37   quiet-unlimited  e/s= 13153.4  pkg=25.63 W  pkg_max=88.0 C

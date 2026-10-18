@@ -1,0 +1,6 @@
+state,epp,fan,pkg_w_median,pkg_w_max,temp_c_max,wall_w_mid,wall_w_low,wall_w_high
+perf-cool,0,cool,22.96,23.70,74,35.0,34.5,35.5
+perf-quiet,0,quiet,23.06,27.60,79,29.9,29.6,30.2
+eff-cool,100,cool,5.95,6.13,44,12.8,12.6,13.0
+eff-quiet,100,quiet,6.04,8.92,44,12.65,12.5,12.8
+idle,0,cool,,,,8.5,8.0,9.0
