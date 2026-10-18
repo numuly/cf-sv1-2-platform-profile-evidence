@@ -12,9 +12,9 @@ Windows-side notes
 - The Panasonic utility on this model exposes only fan control (cool/quiet),
   there is no performance mode; the fan mode is a temperature lever.
 
-- USB-C PD (120 W charger, barrel unplugged): same ballpark as the barrel -
-  ~31 W AC input, 100 ms package peak 30.95 W, no SR4-style ~80 W PD spike
-  (windows/load/peak_pd.csv).
+- Supply: barrel and 120 W USB-C PD, measured with the same meter on the AC
+  input, are identical (~31 W AC, ~30.7 W package peak, 80 C) - no SR4-style
+  ~80 W PD spike (windows/load/peak_pd.csv, peak_barrel_dlx.csv).
 
 - Battery side: the platform battery policy (EC + Intel DPTF) pulls sustained
   package power back to ~5 W regardless of EPP, so there is no clean DC matrix.
