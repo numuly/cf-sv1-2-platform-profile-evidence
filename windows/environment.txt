@@ -1,4 +1,4 @@
-﻿# Windows-side environment for the CF-SV1-2 comparison
+# Windows-side environment for the CF-SV1-2 comparison
 captured: 2026-10-18T13:02:20.4351731+08:00
 
 ## System

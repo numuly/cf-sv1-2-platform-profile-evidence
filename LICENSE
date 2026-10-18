@@ -1,0 +1,24 @@
+This repository is licensed under a split license.
+
+  driver/                     GPL-2.0-only   (see LICENSES/GPL-2.0-only.txt)
+  everything else             CC-BY-4.0      (see LICENSES/CC-BY-4.0.txt)
+
+"Everything else" covers documentation, measurement data and tools -- i.e. the
+whole tree except `driver/`.
+
+Rationale: `driver/cf-sv1-platform_profile-quirk.patch` modifies the Linux
+kernel driver `drivers/platform/x86/panasonic-laptop.c` (SPDX
+`GPL-2.0-only`) and is intended for the upstream kernel, so it carries the
+kernel's license. The workbook around it (docs and data) is published under
+CC-BY-4.0.
+
+SPDX-License-Identifier: GPL-2.0-only AND CC-BY-4.0
+(per-path identifiers apply; the machine-readable form is in `REUSE.toml`,
+which is the authoritative mapping — this file is the human summary).
+
+Attribution for the CC-BY-4.0 parts:
+  Wu Zhipeng <zepwu@foxmail.com>, "CF-SV1-2 platform_profile upstream workbook",
+  https://github.com/numuly/cf-sv1-2-platform-profile-evidence
+
+(The public repository above holds the published evidence and documentation;
+this workbook is the working copy it is curated from.)

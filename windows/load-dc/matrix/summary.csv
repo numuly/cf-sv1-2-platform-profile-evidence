@@ -1,0 +1,5 @@
+state,n,pkg_w_median,pkg_w_min,pkg_w_max,temp_c_max
+eff-cool,145,4.65,3.40,6.04,40
+eff-quiet,152,4.66,3.28,16.21,50
+perf-cool,147,4.87,3.63,15.23,57
+perf-quiet,164,4.85,3.30,5.78,39

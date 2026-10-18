@@ -1,0 +1,28 @@
+[round 1] perf-quiet epp=0 fan=quiet
+label=perf-quiet iterations=51184000000
+[round 1] eff-cool epp=100 fan=cool
+label=eff-cool iterations=70758000000
+[round 1] eff-quiet epp=100 fan=quiet
+label=eff-quiet iterations=65190000000
+[round 1] perf-cool epp=0 fan=cool
+label=perf-cool iterations=147236000000
+[round 2] eff-cool epp=100 fan=cool
+label=eff-cool iterations=50960000000
+[round 2] eff-quiet epp=100 fan=quiet
+label=eff-quiet iterations=50756000000
+[round 2] perf-cool epp=0 fan=cool
+label=perf-cool iterations=51038000000
+[round 2] perf-quiet epp=0 fan=quiet
+label=perf-quiet iterations=51398000000
+[round 3] eff-quiet epp=100 fan=quiet
+label=eff-quiet iterations=50364000000
+[round 3] perf-cool epp=0 fan=cool
+label=perf-cool iterations=51076000000
+[round 3] perf-quiet epp=0 fan=quiet
+label=perf-quiet iterations=51296000000
+[round 3] eff-cool epp=100 fan=cool
+label=eff-cool iterations=51396000000
+eff-cool     n=145 pkg=4.65 W (3.40-6.04)  maxT=40 C
+eff-quiet    n=152 pkg=4.66 W (3.28-16.21)  maxT=50 C
+perf-cool    n=147 pkg=4.87 W (3.63-15.23)  maxT=57 C
+perf-quiet   n=164 pkg=4.85 W (3.30-5.78)  maxT=39 C

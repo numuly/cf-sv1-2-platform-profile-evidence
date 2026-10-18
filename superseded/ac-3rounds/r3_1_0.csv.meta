@@ -1,0 +1,4 @@
+ctx pre: AC=1 S0IX=0x0 PWRS=0x1 CEFM=0x1 EPLE=0x0 ppd=balanced epp=power
+    events per second:  5424.40
+    total number of events:              325491
+ctx post: AC=1 S0IX=0x0 PWRS=0x1 CEFM=0x1 EPLE=0x0 ppd=balanced epp=power

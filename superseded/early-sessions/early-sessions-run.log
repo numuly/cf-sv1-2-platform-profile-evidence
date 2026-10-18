@@ -1,0 +1,73 @@
+===== RUN 2026-10-11T14:49:45,455595770+08:00 =====
+-- PRE 2026-10-11T14:49:45,491672945+08:00 --
+AC=1 PPD=balanced orig(mode=sv tier=power-saver)
+-- sv CLI shape --
+sv — temperature-driven fan quiet/cool governor (CF-SV1)
+
+USAGE:
+    sv [daemon] [OPTIONS]     run the governor
+    sv <COMMAND> [ARGS]       talk to the executor over the control socket
+
+DAEMON OPTIONS:
+    --config PATH    INI file to read (default: /etc/panafanpwrd.conf)
+    --socket PATH    control socket (default: /run/sv/control.sock)
+    --heartbeat PATH touch PATH every tick for the thermal sentinel
+    --dry-run        shadow mode: decide but never write registers
+    --shadow        alias of --dry-run
+soak-timer stopped (resumed in restore)
+system
+mode=system
+sv procs: 247 [kworker/R-ext4-rsv-conversion]
+1613 /usr/local/bin/sv-tray
+130671 /usr/local/bin/sv-hw --live --ppd --config /etc/sv-hw.conf --socket /run/sv/control.sock
+188907 /usr/local/bin/sv --config /etc/sv.conf --heartbeat /run/sv-sentinel/heartbeat
+== STATE SEFM=1 SEPL=1  2026-10-11T14:49:48,835292205+08:00 ==
+readback CEFM=0x1 EPLE=0x1 (expect CEFM=1 EPLE=1)
+-- settle 30s idle --
+-- sysbench 60s 2026-10-11T14:50:19,910738142+08:00 --
+    events per second:  8228.96
+General statistics:
+    total time:                          60.0009s
+    total number of events:              493763
+-- stress-ng matrix 60s 2026-10-11T14:51:19,929794159+08:00 --
+-- end temps: pkg=44000 sen1=39050 sen2=37650
+-- cooldown 75s --
+== STATE SEFM=0 SEPL=1  2026-10-11T14:54:24,441445591+08:00 ==
+readback CEFM=0x0 EPLE=0x1 (expect CEFM=0 EPLE=1)
+-- settle 30s idle --
+-- sysbench 60s 2026-10-11T14:54:55,513476006+08:00 --
+    events per second:  8143.40
+General statistics:
+    total time:                          60.0008s
+    total number of events:              488627
+-- stress-ng matrix 60s 2026-10-11T14:55:55,532505817+08:00 --
+-- end temps: pkg=38000 sen1=34850 sen2=33450
+-- cooldown 75s --
+== STATE SEFM=1 SEPL=0  2026-10-11T14:59:00,240262152+08:00 ==
+readback CEFM=0x1 EPLE=0x0 (expect CEFM=1 EPLE=0)
+-- settle 30s idle --
+-- sysbench 60s 2026-10-11T14:59:31,312578697+08:00 --
+    events per second:  8515.12
+General statistics:
+    total time:                          60.0008s
+    total number of events:              510932
+-- stress-ng matrix 60s 2026-10-11T15:00:31,331861503+08:00 --
+-- end temps: pkg=44000 sen1=39050 sen2=37250
+-- cooldown 75s --
+== STATE SEFM=0 SEPL=0  2026-10-11T15:03:37,062460772+08:00 ==
+readback CEFM=0x0 EPLE=0x0 (expect CEFM=0 EPLE=0)
+-- settle 30s idle --
+-- sysbench 60s 2026-10-11T15:04:08,139536272+08:00 --
+    events per second:  8526.70
+General statistics:
+    total time:                          60.0005s
+    total number of events:              511625
+-- stress-ng matrix 60s 2026-10-11T15:05:08,158415855+08:00 --
+-- end temps: pkg=36000 sen1=33450 sen2=32550
+-- cooldown 75s --
+-- ALL STATES DONE 2026-10-11T15:08:13,854390938+08:00 --
+-- RESTORE (2026-10-11T15:08:13,860788988+08:00) --
+sv
+mode=sv tier=power-saver
+sv-hw=active cdev2_cur=0
+soak-timer=active

@@ -1,0 +1,41 @@
+===== RUN-PERF2 2026-10-11T15:27:44,623629081+08:00 =====
+/tmp/opencode/sv-4state/measure-perf2.sh: line 31: PIN: unbound variable
+-- RESTORE 2026-10-11T15:27:45,197739519+08:00 --
+sv
+mode=sv tier=power-saver ppd=balanced epp=performance epp-timer=active
+sv-hw=active soak=active
+===== RUN-PERF2 2026-10-11T15:29:36,388650423+08:00 =====
+system
+mode=system
+== PERF2 SEFM=0 SEPL=1 2026-10-11T15:29:39,712571991+08:00 ==
+readback CEFM=0x1 EPLE=0x1
+!! mismatch ABORT
+-- RESTORE 2026-10-11T15:29:40,768932533+08:00 --
+sv
+mode=sv tier=power-saver ppd=balanced epp=balance_performance epp-timer=active
+sv-hw=active soak=active
+===== RUN-PERF2 2026-10-11T15:31:48,711202387+08:00 =====
+system
+mode=system
+/tmp/opencode/sv-4state/measure-perf2.sh: line 36: acpi: command not found
+/tmp/opencode/sv-4state/measure-perf2.sh: line 36: acpi: command not found
+dormant-confirm: CEFM stable at  (after ~5s)
+== PERF2 SEFM=0 SEPL=1 2026-10-11T15:32:02,301877018+08:00 ==
+readback CEFM=0x0 EPLE=0x1
+    events per second:  8173.53
+    total number of events:              490434
+Value --timeout contains non-numeric: '-timeout'
+end temps: pkg=36000 sen1=33950 sen2=32550
+-- EPP/freq sanity (load window): 2099978 2100000 2182335 2299610 2299976 2300000 2361597 2373416 2374612 2389805 2398242 2400000 2419841 2425321 2427160 2432591 2437440 2442515 2451463 2452882 2467979 2468017 2482645 2496559 2499974 2500000 2500025 2500181 2504530 2518143 2538737 2542403 2568584 2573362 2577270 2592041 2599914 2600000  freqs=performance
+== PERF2 SEFM=0 SEPL=0 2026-10-11T15:36:38,347890452+08:00 ==
+readback CEFM=0x0 EPLE=0x0
+    events per second:  8514.98
+    total number of events:              510922
+Value --timeout contains non-numeric: '-timeout'
+end temps: pkg=37000 sen1=33450 sen2=32050
+-- EPP/freq sanity (load window): 2599569 2599973 2600000 2600026  freqs=performance
+-- PERF2 DONE 2026-10-11T15:41:14,351555646+08:00 --
+-- RESTORE 2026-10-11T15:41:14,355748730+08:00 --
+sv
+mode=sv tier=power-saver ppd=balanced epp=power epp-timer=active
+sv-hw=active soak=active

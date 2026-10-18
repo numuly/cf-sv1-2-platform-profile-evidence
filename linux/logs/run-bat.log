@@ -1,0 +1,30 @@
+===== BATTERY RUN 2026-10-11T19:07:15,655094828+08:00 =====
+AC=0 battery=99%
+system
+mode=system epp=performance ppd=power-saver
+gate: dormant CEFM=0x1
+== BAT SEFM=0 SEPL=1 2026-10-11T19:07:25,870500117+08:00 ==
+ctx: AC=0 S0IX=0x0 PWRS=0x0 CEFM=0x0 EPLE=0x1 P140=0xa P141=0x7 P143=0xa P152=0x7 P154=0xf ppd=power-saver epp=performance
+-- settle 30s --
+    events per second:  8149.56
+end temps: pkg=41000 sen1=35350 sen2=32950
+== BAT SEFM=1 SEPL=1 2026-10-11T19:09:57,409301293+08:00 ==
+ctx: AC=0 S0IX=0x0 PWRS=0x0 CEFM=0x1 EPLE=0x1 P140=0xa P141=0x7 P143=0xa P152=0x7 P154=0xf ppd=power-saver epp=performance
+-- settle 30s --
+    events per second:  8122.64
+end temps: pkg=49000 sen1=39050 sen2=36250
+== BAT SEFM=1 SEPL=0 2026-10-11T19:12:28,990478236+08:00 ==
+ctx: AC=0 S0IX=0x0 PWRS=0x0 CEFM=0x1 EPLE=0x0 P140=0xa P141=0x7 P143=0xa P152=0x7 P154=0xf ppd=power-saver epp=performance
+-- settle 30s --
+    events per second:  8495.67
+end temps: pkg=53000 sen1=42850 sen2=39550
+== BAT SEFM=0 SEPL=0 2026-10-11T19:15:00,653573950+08:00 ==
+ctx: AC=0 S0IX=0x0 PWRS=0x0 CEFM=0x0 EPLE=0x0 P140=0xa P141=0x7 P143=0xa P152=0x7 P154=0xf ppd=power-saver epp=performance
+-- settle 30s --
+    events per second:  8497.56
+end temps: pkg=43000 sen1=37650 sen2=36250
+-- BATTERY DONE 2026-10-11T19:17:31,281315973+08:00 cap=96% --
+-- RESTORE 2026-10-11T19:17:31,288194388+08:00 --
+sv
+mode=sv tier=power-saver ppd=power-saver epp=power no_turbo=1 AC=0
+sv-hw=active soak=active epp-timer=active

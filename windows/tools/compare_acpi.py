@@ -2,7 +2,7 @@
 """Pair the Windows registry ACPI dump with the pre-Windows Linux dump.
 
 The Windows dump comes from HKLM\\HARDWARE\\ACPI (acpi_registry_dump.py); the
-Linux dump is evidence/acpi/acpi-tables-20261016.tar.gz from the repo.
+Linux dump is linux/acpi/acpi-tables-20261016.tar.gz from the repo.
 Firmware SSDTs must be byte-identical across the BIOS V2.00L23 -> V2.00L24
 change; Linux also has the runtime "dynamic" SSDTs Windows does not expose.
 """

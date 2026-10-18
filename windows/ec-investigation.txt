@@ -1,0 +1,75 @@
+Windows EC / ACPI-method investigation (CF-SV1-2, 2026-10-18)
+=============================================================
+
+Goal: find a user-mode way to reproduce the Linux harness's SEFM/SEPL writes
+(EC fan / TDP toggles) so the Windows side could be measured in the same four
+states.  Result: not possible from user mode; the notes below record what was
+tried and what the Windows stack actually does.
+
+1. PawnIO LpcACPIEC (signed official module) gives raw byte I/O on the ACPI EC
+   ports 0x62 (data) / 0x66 (cmd+status).  The standard EC transaction is
+   implemented in tools/ec_pawnio.py and works: a full 0x00..0xFF EC RAM dump
+   was read successfully (environment.txt, "EC baseline").
+
+2. Direct EC RAM writes work for some offsets and are ignored for others:
+     write 0x79 <- 0x05  : sticks (read back 0x05), but does NOT change the
+                           effective fan behaviour
+     write 0x40 <- 0xAA  : ignored (read back 0x45, the previous value)
+   So 0x79 is not the effective fan-policy register on Windows.
+
+3. The DSDT EC88 path: EC88 -> EC87 (ECST!=0) writes EC RAM 0x04..0x07 with
+   {opcode, sub, value, arg3} and polls 0x04.  Reproducing this from user mode
+   (ec_state.command) returns success but changes nothing:
+     cmd 0xB5/0x79/0x05 -> 0x79 stays 0x00, 0xEE stays 0x23
+     cmd 0xB5/0xCA/0x50 -> 0xCA stays 0x9F
+   On this install the effective path is EC86 -> ASRV: a GNVS mailbox
+   (AFNN/AG_1/AG_2/ARET/ARBF) plus an SMI triggered by writing 0xE1 to the
+   ACPI SMI command port 0xB2 (DSDT: OperationRegion SPRT, SystemIO 0xB2).
+   Port 0xB2 is not reachable through any signed PawnIO module, so the SMI path
+   cannot be driven from user mode.
+
+4. What Windows itself exposes (Panasonic PPcHub 4.13.1100.0):
+     PPcHub.CLI.exe get  fancontrol mode   -> "cool"
+     PPcHub.CLI.exe set  fancontrol mode quiet|cool
+   This is the firmware fan lever.  Under an 8-thread load it changes the CPU
+   temperature (quiet runs a few degrees hotter at essentially the same package
+   power) but does not change package power.
+
+5. Power side: Windows does not set the EC SEPL lock; the OS power lever is
+   EPP.  With the power-mode overlay disabled and the base scheme EPP set:
+     EPP = 0   (performance) : ~22.7 W package under the 8-thread load
+     EPP = 100 (efficiency)  : ~5.9 W package under the same load
+   (MSR 0x610 stays 28 W / 60 W in both, matching the Linux observation that
+   the RAPL MSR is not the lever.)
+
+6. EC state observed under Windows (idle):
+     ER79 = 0x00, ERCA = 0x9F, ERCB = 0x9F, EREE = 0x23
+   MSR 0x610 = 0x804281E000DD80E0 -> PL1 = 28 W, PL2 = 60 W.
+
+Conclusion: the Windows stack leaves the EC in its boot/default TDP state and
+drives power through EPP, while the EC fan policy is driven through the
+Panasonic service (SMI path).  The four Linux states (SEFM x SEPL at fixed EPP)
+cannot be reproduced from Windows user mode without a signed driver that can
+evaluate the ACPI methods.
+
+7. Battery-side caveats (2026-10-18, AC unplugged)
+
+   a) The first battery run looked like the EC had clamped package power to
+      ~5 W for every EPP state.  It was not the EC: Windows' *DC* processor
+      settings (PROCTHROTTLEMAX / PERFBOOSTMODE) are unset in the Balanced
+      scheme, so Windows throttles on battery.  Setting the DC values
+      explicitly (max state 100, boost aggressive) restores the EPP lever:
+      DC EPP=0 ~14.8 W, DC EPP=100 ~6.2 W.  The battery ceiling (~15 W) is
+      lower than AC (~23 W), which is consistent with an EC/battery discharge
+      limit at the top, but the OS policy is what caused the ~5 W plateau.
+
+   b) EC register read-back is unreliable while on battery: the ACPI EC driver
+      polls more often, and the user-mode transaction in ec_pawnio.py races
+      with it (0x79/0xCA/0xCB/0xEE flip between plausible values and 0x90/0xFF,
+      and reads intermittently fail).  The battery-run .meta EC values should
+      not be over-interpreted; the package power/temperature from LHM is fine.
+
+   c) root\wmi BatteryStatus.DischargeRate is sticky: the same value can be
+      reported for minutes, so it is not usable for per-state input power.
+      Only the AC wall-meter numbers are used for input power.
+

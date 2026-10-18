@@ -1,0 +1,5 @@
+state,n,pkgW_mean_window,pkgW_min,pkgW_max,pkg_temp_max_C_median,notes
+high(active)+locked,3,6.28,6.21,6.33,41.0,SEFM/SEPL=0_1
+quiet(passive)+locked,3,6.23,6.21,6.34,45.0,SEFM/SEPL=1_1
+quiet(passive)+unlocked,3,6.22,6.19,6.26,47.0,SEFM/SEPL=1_0
+high(active)+unlocked,3,6.23,6.22,6.25,43.0,SEFM/SEPL=0_0

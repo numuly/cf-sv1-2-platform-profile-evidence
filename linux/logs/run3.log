@@ -1,0 +1,110 @@
+===== RUN3 START 2026-10-11T17:27:30,141649369+08:00 kernel=7.0.0-38-generic =====
+orig: mode=sv tier=power-saver ppd=balanced
+battery: capacity=100%
+system
+mode=system
+gate[AC]: dormant, CEFM stable=0x1 (~5s)
+firmware ctx: 0x0 0x1 | P140=0xa P141=0x7 P143=0xa P152=0x7 P154=0xf P164=0x3 P166=0x7
+----- ROUND 1 -----
+== RUN r1 SEFM=0 SEPL=1 2026-10-11T17:27:40,582838679+08:00 ==
+readback CEFM=0x0 EPLE=0x1 (expect 0 1)
+-- settle 30s --
+    events per second:  5365.20
+    total number of events:              321936
+end temps: pkg=38000 sen1=33950 sen2=32050
+-- cooldown 40s --
+== RUN r1 SEFM=1 SEPL=1 2026-10-11T17:30:12,434907747+08:00 ==
+readback CEFM=0x1 EPLE=0x1 (expect 1 1)
+-- settle 30s --
+    events per second:  5292.16
+    total number of events:              317563
+end temps: pkg=43000 sen1=36750 sen2=34450
+-- cooldown 40s --
+== RUN r1 SEFM=1 SEPL=0 2026-10-11T17:32:43,379374027+08:00 ==
+readback CEFM=0x1 EPLE=0x0 (expect 1 0)
+-- settle 30s --
+    events per second:  5293.87
+    total number of events:              317658
+end temps: pkg=45000 sen1=38650 sen2=36250
+-- cooldown 40s --
+== RUN r1 SEFM=0 SEPL=0 2026-10-11T17:35:14,476531460+08:00 ==
+readback CEFM=0x0 EPLE=0x0 (expect 0 0)
+-- settle 30s --
+    events per second:  5364.97
+    total number of events:              321924
+end temps: pkg=39000 sen1=35350 sen2=34450
+-- cooldown 40s --
+----- ROUND 2 -----
+== RUN r2 SEFM=1 SEPL=0 2026-10-11T17:37:45,430966871+08:00 ==
+readback CEFM=0x1 EPLE=0x0 (expect 1 0)
+-- settle 30s --
+    events per second:  5412.08
+    total number of events:              324748
+end temps: pkg=44000 sen1=36750 sen2=34850
+-- cooldown 40s --
+== RUN r2 SEFM=0 SEPL=0 2026-10-11T17:40:17,404987733+08:00 ==
+readback CEFM=0x0 EPLE=0x0 (expect 0 0)
+-- settle 30s --
+    events per second:  5481.38
+    total number of events:              328907
+end temps: pkg=38000 sen1=34450 sen2=33450
+-- cooldown 40s --
+== RUN r2 SEFM=0 SEPL=1 2026-10-11T17:42:49,381434935+08:00 ==
+readback CEFM=0x0 EPLE=0x1 (expect 0 1)
+-- settle 30s --
+    events per second:  5510.07
+    total number of events:              330629
+end temps: pkg=37000 sen1=33450 sen2=32050
+-- cooldown 40s --
+== RUN r2 SEFM=1 SEPL=1 2026-10-11T17:45:20,779369133+08:00 ==
+readback CEFM=0x1 EPLE=0x1 (expect 1 1)
+-- settle 30s --
+    events per second:  5424.97
+    total number of events:              325522
+end temps: pkg=41000 sen1=35850 sen2=33450
+-- cooldown 40s --
+----- ROUND 3 -----
+== RUN r3 SEFM=0 SEPL=0 2026-10-11T17:47:52,597724464+08:00 ==
+readback CEFM=0x0 EPLE=0x0 (expect 0 0)
+-- settle 30s --
+    events per second:  5506.93
+    total number of events:              330438
+end temps: pkg=38000 sen1=33950 sen2=32550
+-- cooldown 40s --
+== RUN r3 SEFM=0 SEPL=1 2026-10-11T17:50:24,130867521+08:00 ==
+readback CEFM=0x0 EPLE=0x1 (expect 0 1)
+-- settle 30s --
+    events per second:  5515.04
+    total number of events:              330928
+end temps: pkg=36000 sen1=32950 sen2=31550
+-- cooldown 40s --
+== RUN r3 SEFM=1 SEPL=1 2026-10-11T17:52:55,589554571+08:00 ==
+readback CEFM=0x1 EPLE=0x1 (expect 1 1)
+-- settle 30s --
+    events per second:  5439.90
+    total number of events:              326418
+end temps: pkg=42000 sen1=35350 sen2=32950
+-- cooldown 40s --
+== RUN r3 SEFM=1 SEPL=0 2026-10-11T17:55:26,434860304+08:00 ==
+readback CEFM=0x1 EPLE=0x0 (expect 1 0)
+-- settle 30s --
+    events per second:  5424.40
+    total number of events:              325491
+end temps: pkg=44000 sen1=37250 sen2=34850
+-- cooldown 40s --
+-- PHASE1 DONE 2026-10-11T17:57:57,358519550+08:00 --
+-- PHASE2 WAIT-BATTERY: unplug AC within 900s (auto-detect) --
+-- PHASE2 SKIP: AC still online after 900s --
+-- PHASE3 suspend test 2026-10-11T18:13:00,070648274+08:00 --
+system
+gate[SUSP]: dormant, CEFM stable=0x1 (~5s)
+pre-suspend: CEFM=0x1 EPLE=0x1 S0IX=0x0 PWRS=0x1
+rtcwake -m mem -s 45 ...
+rtcwake: wakeup from "mem" using /dev/rtc0 at Sun Oct 11 10:13:55 2026
+post-resume: CEFM=0x1 EPLE=0x1 S0IX=0x0 PWRS=0x1
+PHASE3: profile SURVIVED suspend/resume
+-- ALL DONE 2026-10-11T18:14:08,942664061+08:00 --
+-- RESTORE 2026-10-11T18:14:08,950416332+08:00 --
+sv
+mode=sv tier=power-saver ppd=balanced epp=power
+sv-hw=active soak=active epp-timer=active cdev2=0

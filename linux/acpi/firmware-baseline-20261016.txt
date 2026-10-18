@@ -1,0 +1,4 @@
+BIOS: V2.00L23
+product: CFSV1-2
+board: CFSV1-2H
+ssdt2.dat sha256: f0d92acff1f43c29c7921ebeb6951375f21d5fc554e7070426c6b9e8f62f5f61

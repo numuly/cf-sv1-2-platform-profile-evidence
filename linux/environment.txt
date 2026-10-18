@@ -1,0 +1,51 @@
+# Linux-side environment for the CF-SV1-2 measurements
+
+Companion to `windows/environment.txt`. Everything below is what was recorded
+at the time; what was not is pointed at from the end of this file instead of
+being filled in later from memory.
+
+## Machine
+
+| | |
+|---|---|
+| vendor / model | Panasonic Corporation / CFSV1-2 (DMI `CFSV1-2`) |
+| board | CFSV1-2H |
+| CPU | 11th Gen Intel Core i5-1145G7 (4C/8T) |
+| family | Let'snote/TOUGHBOOK |
+| BIOS | V2.00L23 (the later V2.00L24 was verified byte-identical) |
+| DMI decode | `acpi/dmidecode-20261016.txt` (serials/UUID redacted) |
+
+## Software
+
+| | |
+|---|---|
+| OS | Ubuntu |
+| kernel (measurements) | **7.0.0-38-generic** |
+| kernel (patched-driver build/load test) | **7.3.0-9-generic** — see `../driver/README.md` |
+| iasl | 20251212 (used for `acpi/ssdt2.dsl`) |
+| sysbench | `sysbench cpu --threads=8 --time=60` (version not recorded) |
+| thermald | present; stopped for the AC matrix, A/B-tested separately |
+| acpi_call | used for all EC reads/writes via `/proc/acpi/call` |
+
+## Measurements-relevant settings
+
+| | |
+|---|---|
+| EC path | `\_SB_.PC00.LPCB.EC0_` |
+| EC methods | `CEFM`/`SEFM` (fan policy), `EPLE`/`SEPL` (TDP policy) |
+| RAPL counter | `/sys/class/powercap/intel-rapl:0/energy_uj` |
+| MSR | `/dev/cpu/0/msr`, `0x610` (RAPL PL1/PL2) |
+| thermal zones | `x86_pkg_temp`, `TCPU`, `SEN1` |
+| power | AC (the battery matrix is separate, EPP pinned to performance) |
+| EPP | `performance` |
+| turbo | enabled (`no_turbo=0`) |
+| userspace governor | **off** — `sv.service`, `sv-hw.service`, `sv-epp.timer` stopped, `TFN1._FSL` released so the firmware owns the fan |
+| ambient temperature | not recorded |
+
+## Not recorded
+
+The list of what was never captured — and what it affects — lives with the
+method, so it has one home: `../docs/METHOD.md`, section "Not recorded". It
+covers the tool versions, the meter model and resolution, the ambient
+temperature and the per-run `TFN1._FSL` value. None of it changes a measurement
+above.

@@ -1,0 +1,5 @@
+state,n,pkgW_mean_window,pkg_temp_max_C,notes
+high(active)+locked,1,9.98,48.0,SEFM/SEPL=0_1; EPP=performance; S0IX=PWRS=0
+quiet(passive)+locked,1,10.01,57.0,SEFM/SEPL=1_1; EPP=performance; S0IX=PWRS=0
+quiet(passive)+unlocked,1,10.42,63.0,SEFM/SEPL=1_0; EPP=performance; S0IX=PWRS=0
+high(active)+unlocked,1,10.20,53.0,SEFM/SEPL=0_0; EPP=performance; S0IX=PWRS=0
