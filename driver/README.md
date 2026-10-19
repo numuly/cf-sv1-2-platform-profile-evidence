@@ -1,7 +1,7 @@
 # Test report — patched driver built and loaded on CF-SV1-2
 
 Date: 2026-10-16. This is a *build + load + read-back* test of the RFC v3
-patch with our CF-SV1-2 quirk applied, on a fresh Ubuntu install — not yet a
+patch with the CF-SV1-2 quirk applied, on a fresh Ubuntu install — not yet a
 full measurement campaign.
 
 ## Environment
@@ -37,7 +37,7 @@ apt-get install -y linux-source-7.3.0
 tar -xjf /usr/src/linux-source-7.3.0.tar.bz2 -C /tmp/kern \
     --wildcards '*/drivers/platform/x86/panasonic-laptop.c'
 
-# 2. apply RFC v3 (extract the .c hunk from the v3 message) then our quirk
+# 2. apply RFC v3 (extract the .c hunk from the v3 message) then the quirk
 mkdir -p build/drivers/platform/x86
 cp /tmp/kern/linux-source-7.3.0/drivers/platform/x86/panasonic-laptop.c \
    build/drivers/platform/x86/
