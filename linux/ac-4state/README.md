@@ -9,7 +9,7 @@ performance, `thermald` stopped.
 | `r<round>_<state>.csv` | 1 Hz samples (schema: `../../docs/COLUMNS.md`) |
 | `r<round>_<state>.csv.meta` | per-run context: EC read-back, sysbench score, `MSR 0x610` |
 | `r<round>_<state>.csv.windows` | the load window, as two epoch seconds |
-| `summary.csv` | per-round scores and power — **the reply quotes the median of the rounds** |
+| `summary.csv` | per-round scores and power — **the table in the thread quotes the median of the rounds** |
 | `run.log` | the session log (read-backs, scores, temperatures) |
 
 Package power is `Δenergy / Δtime`, not `Δenergy / sample_count` — read

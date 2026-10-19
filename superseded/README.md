@@ -19,7 +19,7 @@ measurements show.
 
 - Retracted in round 2 (2026-10-16), corrected in round 3 (2026-10-18).
 - Corrected, current data: `../linux/ac-4state/`
-  (the table is `../linux/ac-4state/summary.csv`; the reply quotes its medians).
+  (the table is `../linux/ac-4state/summary.csv`; the thread quotes its medians).
 - What still survives from these runs: the *fan* comparison within a fixed TDP
   state, because both arms shared the EPP condition. The power comparison does
   not.

@@ -62,7 +62,7 @@ file (two epoch seconds: first and last sample of the load), so the window can
 be reproduced without guessing.
 
 **Aggregation.** `summary.csv` per campaign keeps every round; the tables in
-the replies quote the median of the rounds (power and score) and the
+the thread quotes the median of the rounds (power and score) and the
 maximum temperature over the state's rounds. Medians, not means: the
 interesting variation is "quiet runs hotter", and one 88 °C outlier would drag
 a mean.

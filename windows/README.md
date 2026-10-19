@@ -14,7 +14,7 @@ are byte-identical to the Linux dump, so the BIOS update changed nothing.
 
 | path | contents |
 |---|---|
-| `summary.csv` | the numbers in the reply's table: package power per state plus the wall range (the mail collapsed it to one column and appended the peak row) |
+| `summary.csv` | the numbers in the table quoted in the thread: package power per state plus the wall range (collapsed to one column there, with the peak row appended) |
 | `load/` | the 2×2 EPP × fan matrix — `r*.csv` samples (+ `.csv.meta`), per-round `summary.csv` |
 | `load-dc/` | the same matrix on battery — a negative result, kept for the record (`README.md`) |
 | `power/` | `wall-meter.csv`, the AC peak trace (`peak/`), barrel vs USB-C PD (`pd/`) |

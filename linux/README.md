@@ -56,7 +56,7 @@ caveat: `thermald/`.
 
 ## Reproducibility anchors
 
-- `acpi/ssdt2.dat` sha256 = `f0d92acf…` (the value quoted in the replies).
+- `acpi/ssdt2.dat` sha256 = `f0d92acf…` (the value quoted in the thread).
 - The table quoted in the thread is the median of `ac-4state/summary.csv`.
 - Raw 1 Hz samples for every run are included here.
 
