@@ -22,14 +22,12 @@ RFC v3 patches `drivers/platform/x86/panasonic-laptop.c` with pre-image blob
 19d194ff37ca9333157b66c45228669d7c1ede94
 ```
 
-i.e. identical — v3 applies cleanly, and our quirk (post-image `c4b13a3`)
-applies on top with no fuzz.
+i.e. identical — v3 applies cleanly, and the quirk applies on top with no fuzz.
 
 > Note (2026-10-18): the quirk has since been restructured per Ilpo's review to
-> reuse `quirk_cf_sr4` and only add a DMI entry (same boolean mapping), so the
-> current `driver/` no longer has the `c4b13a3` post-image. The build/load test
-> below was run with the earlier revision; the mapping and the driver-side
-> behaviour are unchanged.
+> reuse `quirk_cf_sr4` and only add a DMI entry (same boolean mapping). The
+> build/load test below was run with the earlier revision; the mapping and the
+> driver-side behaviour are unchanged.
 
 ## Recipe
 
@@ -96,14 +94,14 @@ recognised". No errors in `dmesg` on load or profile changes.
 
 ## Not yet done
 
-- rebuild + reload the restructured quirk.  The build/load/round-trip
-  result above is from the earlier `c4b13a3` revision.  The *current* patch
+- rebuild + reload the restructured quirk.  The build/load/round-trip result
+  above predates the restructure.  The *current* patch
   (`.driver_data = &quirk_cf_sr4` + DMI entry, per Ilpo's review) has only had
   its hunk checked for apply — it has not been compiled, loaded, or had the
   `cool`/`quiet`/`performance` <-> `CEFM`/`EPLE` round-trip and the unmapped ->
   `custom` case re-run on hardware.  Redo this on RFC v4.
 - the quirk rebased onto RFC v4;
-- the consolidated in-thread reply carrying the `Tested-by:`.
+- the in-thread `Tested-by:` mail once v4 is available.
 
 (The corrected AC matrix, thermald A/B, Windows comparison and wall-meter
 input power are all done — see `../linux/`.)

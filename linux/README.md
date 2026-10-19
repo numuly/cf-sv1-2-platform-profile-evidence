@@ -2,7 +2,8 @@
 
 Everything measured on Linux for the `platform_profile` discussion, in one
 directory. Machine: Panasonic CF-SV1-2 (DMI `CFSV1-2`, board `CFSV1-2H`),
-i5-1145G7, BIOS V2.00L23, kernel 7.0.0-38-generic (Ubuntu).
+i5-1145G7, BIOS V2.00L23, kernel 7.0.0-38-generic (Ubuntu). The patched-driver
+build/load test ran on a later install, `7.3.0-9-generic` — `../driver/`.
 
 - instrument/settings/formulas: `../docs/METHOD.md`
 - CSV column meanings: `../docs/COLUMNS.md`
@@ -56,16 +57,14 @@ caveat: `thermald/`.
 ## Reproducibility anchors
 
 - `acpi/ssdt2.dat` sha256 = `f0d92acf…` (the value quoted in the replies).
-- The reply's AC table is the median of the rounds in `ac-4state/summary.csv`.
+- The table quoted in the thread is the median of `ac-4state/summary.csv`.
 - Raw 1 Hz samples for every run are included here.
-
-## Personal data
 
 The captures are published as evidence, not as a machine fingerprint: the
 MSDM table (OEM Windows activation data) was removed from
 `acpi/acpidump-20261016.txt` and masked inside `acpi/acpi-tables-20261016.tar.gz`,
-and the machine serials/UUID are redacted in `acpi/dmidecode-20261016.txt`.
-`../tools/check-personal-info.py` is the gate that keeps it that way.
+and the machine serials/UUID are redacted in `acpi/dmidecode-20261016.txt`
+(`../tools/check-personal-info.py` is the gate).
 
 ## Windows
 

@@ -1,6 +1,6 @@
-# FAQ — the three questions this series keeps raising
+# FAQ — the three questions this series raises
 
-Plain answers, each with the evidence that backs it in this workbook.
+Short answers, each with the evidence behind it.
 
 ## 1. Why `platform_profile` and not hwmon or thermal?
 
@@ -45,12 +45,12 @@ technical limit**:
 
 * CF-SR4 boots into aggressive fan + locked TDP; calling that `cool` is the
   honest description, and `balanced` would be a worse name for the same state;
-* CF-SV1-2 shows the *same* boolean mapping (`SEFM`/`SEPL`) as CF-SR4, so it can
-  either reuse the same struct (gaining `cool`) or expose only
-  `balanced`/`quiet`/`performance` and keep `cool` reserved for the SR4;
-* both variants were implemented as a one-line difference while the question is
-  open — the mapping is Alex's call, and the measurements do not depend on it
-  (`cool` and `balanced` are the same EC state).
+* CF-SV1-2 shows the *same* boolean mapping (`SEFM`/`SEPL`) as CF-SR4, so the
+  published patch reuses the SR4 struct and exposes `cool`; dropping `cool` (so
+  the model shows only `balanced`/`quiet`/`performance`) is a one-line change if
+  the maintainer prefers to keep that name SR4-only;
+* the measurements do not depend on the choice — `cool` and `balanced` are the
+  same EC state.
 
 Evidence: `driver/cf-sv1-platform_profile-quirk.patch`, the round-3 reply in
 the [thread](https://lore.kernel.org/all/tencent_36C6A22A8A475F824CB6BAC101A1F272E709@qq.com/),

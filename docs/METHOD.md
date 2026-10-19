@@ -1,8 +1,7 @@
 # Method — how every number in this repository was produced
 
-This file exists because a reviewer must be able to recompute the tables from
-the raw CSV files and get the same numbers. Where something was not recorded at
-the time, it is listed under "Not recorded" rather than guessed.
+The tables can be recomputed from the raw CSVs. Where something was not
+recorded at the time it is listed under "Not recorded" rather than guessed.
 
 ## Linux side (`linux/`)
 
@@ -47,8 +46,6 @@ daemon was re-applying the profile.
   the sysbench score and `MSR 0x610` (RAPL PL1/PL2) into the `.meta` file.
 
 **Package power formula.**
-
-Read this before recomputing.
 
 ```
 pkg_W = (energy_uj[last] - energy_uj[first]) / 1e6 / (epoch[last] - epoch[first])

@@ -15,16 +15,16 @@ Shows whether your EC exposes the same two toggles the RFC maps.
 modprobe acpi_call
 
 EC='\_SB_.PC00.LPCB.EC0_'          # your EC path may differ; check your DSDT
-cat /proc/acpi/call >/dev/null     # sanity
 
-# read the two policy booleans
-echo "\$EC.CEFM" > /proc/acpi/call; cat /proc/acpi/call    # fan: 0 active, 1 passive
-echo "\$EC.EPLE" > /proc/acpi/call; cat /proc/acpi/call    # TDP: 1 locked, 0 unlocked
+# read the two policy booleans (plain quotes: the shell must expand $EC)
+echo "$EC.CEFM" > /proc/acpi/call; cat /proc/acpi/call    # fan: 0 active, 1 passive
+echo "$EC.EPLE" > /proc/acpi/call; cat /proc/acpi/call    # TDP: 1 locked, 0 unlocked
 
-# try flipping them (write back the original value afterwards!)
-echo "\$EC.SEFM 0" > /proc/acpi/call
-echo "\$EC.SEPL 1" > /proc/acpi/call
-# re-read CEFM/EPLE and confirm they followed
+# optional: prove they move, then restore exactly what you read above.  The
+# values shown are only an example (the CEFM=0 / EPLE=1 read above); use yours.
+echo "$EC.SEFM 0" > /proc/acpi/call
+echo "$EC.SEPL 1" > /proc/acpi/call
+# re-read CEFM/EPLE, confirm they followed, then write your original values back
 ```
 
 Also useful:

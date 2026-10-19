@@ -128,14 +128,13 @@ read on a wall plug meter while the state was held at steady load
   evaluate the ACPI methods (the SMI path on port 0xB2); see
   `ec-investigation.txt`.
 
-For the LKML thread this answers the "Windows comparison" item: the EC fan
-toggle is the same temperature lever it is on Linux, and the power side is an
-OS policy (EPP) on Windows rather than the EC `SEPL` boolean.
+On both sides the fan toggle moves temperature rather than package power; on
+Windows the power side is an OS policy (EPP), not the EC `SEPL` boolean.
 
 ## Peak / spike (AC only, no battery)
 
-Alex's 2026-10-15 mail asks for Windows thermal/power data and reports SR4
-Windows spikes of ~60 W on the AC charger / ~80 W on a 100 W USB-C PD charger.
+The thread asked for Windows thermal/power data and reports SR4 spikes of
+~60 W on the AC charger and ~80 W on a 100 W USB-C PD charger.
 The SR4 is a different CPU (i5-1345U) with its own power configuration, so the
 absolute numbers are not comparable across models; the meaningful comparison
 is Windows vs Linux on the same unit.  On this CF-SV1-2 the platform does not
@@ -171,33 +170,12 @@ there is no SR4-style ~80 W PD spike.  Raw: `power/pd/peak_pd.csv`,
 
 ## Battery-side (DC) comparison
 
-The 2×2 matrix was repeated on battery (AC unplugged, `BatteryStatus=1`) to
-mirror the Linux `battery-4state` session.  The wall meter measures AC input,
-so the DC input power would have to come from the battery discharge rate
-(`root\wmi BatteryStatus`); that value turned out to be sticky (the same
-reading is reported for minutes), so it is not usable per state.
-
-The DC side did not produce a clean matrix, and the reason is itself the
-result:
-
-* The first attempt showed ~5 W for every EPP state.  That was not the EC:
-  Windows' *DC* processor settings (`PROCTHROTTLEMAX`, `PERFBOOSTMODE`) are
-  unset in the Balanced scheme, so Windows throttles on battery.  Pinning them
-  (`tools/win_matrix.py` sets AC and DC max state = 100, boost = aggressive)
-  restored the lever only briefly.
-* With the DC settings pinned, the platform still pulls package power back to
-  ~5 W within about a minute; short bursts reach ~15 W at EPP=0.  Stopping the
-  Intel Dynamic Tuning service (`esifsvc`, DPTF) did not remove the cap
-  (~6.9 W), and a 120 s run stayed ~6.9 W and then rose to ~15 W.  The
-  behaviour is dominated by the platform battery power management (EC + Intel
-  DPTF), not by EPP, and is not reproducible enough for a state matrix.
-* EC register read-back also becomes unreliable on battery: the ACPI EC driver
-  polls more often and the user-mode transaction races with it, so the
-  battery-run `.meta` EC values are not trustworthy.
-
-The raw DC attempt is kept for the record under `load-dc/` (a negative
-result, with the DC-setting gotcha); the AC matrix above is the comparison to
-use.
+The 2×2 matrix was repeated on battery to mirror the Linux `battery-4state`
+session.  It did not produce a clean matrix, and the reason is the result:
+Windows' DC processor settings throttle the package, and even with those pinned
+the platform pulls sustained package power back to ~5 W (EC + Intel DPTF, not
+EPP).  The attempt, its numbers and the DC-setting gotcha are kept in
+`load-dc/README.md`; the AC matrix above is the comparison to use.
 
 ## Tools
 
