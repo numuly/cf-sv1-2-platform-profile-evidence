@@ -44,7 +44,8 @@ Upstream is at **v4** (2026-10-26); Alex confirmed the SV1 mapping
 (`cool`/`quiet`/`performance`, reusing `quirk_cf_sr4`) and asked for the DMI
 entry as its own patch on top of the series. The entry is rebased, built and
 loaded, and the round-trip / `custom` / s2idle-resume tests are in
-`driver/README.md`; the formal `Tested-by:` is being sent. Data state: tag
+`driver/README.md`; the formal `Tested-by:` and the entry were sent on
+2026-10-26. Data state: tag
 `v4-test-20261026` (the v3 measurement state remains `round-3-20261018`). The
 round-1 AC table is retracted (`superseded/`).
 
