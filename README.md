@@ -29,22 +29,24 @@ turbo on, `thermald` stopped. Method and limits: `docs/METHOD.md`.
 ```
 linux/       Linux measurements (README.md there)
 windows/     Windows 11 measurements, same unit (README.md there)
-driver/      proposed DMI entry + build/load report
+driver/      CF-SV1-2 DMI entry, v4 build/load/round-trip report and logs
 docs/        METHOD, COLUMNS, FAQ, TESTING
 superseded/  retracted round-1 data
 tools/       the measurement harness, the personal-data gate, the doc-number gate
 ```
 
-To reproduce: `patch -p1 < driver/cf-sv1-platform_profile-quirk.patch` against
-RFC v3 — recipe in `driver/README.md`, other models in `docs/TESTING.md`.
+To reproduce: `patch -p1 < driver/cf-sv1-platform_profile-quirk.patch` on top of
+RFC v4 — recipe in `driver/README.md`, other models in `docs/TESTING.md`.
 
 ## Status
 
-Upstream is at v3 (2026-10-07); v4 is pending, so the `Tested-by:` is still to
-come. The `get()`/`set()` round-trip and the unmapped → `custom` case were
-verified on the earlier quirk revision; the restructured 8-line DMI entry is
-`apply`-checked only, and `get()` after resume is untested. Data state: tag
-`round-3-20261018`. The round-1 AC table is retracted (`superseded/`).
+Upstream is at **v4** (2026-10-26); Alex confirmed the SV1 mapping
+(`cool`/`quiet`/`performance`, reusing `quirk_cf_sr4`) and asked for the DMI
+entry as its own patch on top of the series. The entry is rebased, built and
+loaded, and the round-trip / `custom` / s2idle-resume tests are in
+`driver/README.md`; the formal `Tested-by:` is being sent. Data state: tag
+`v4-test-20261026` (the v3 measurement state remains `round-3-20261018`). The
+round-1 AC table is retracted (`superseded/`).
 
 ## Notes
 

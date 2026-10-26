@@ -1,0 +1,6 @@
+=== pre 2026-10-26T19:07:11+08:00 ===
+profile=cool CEFM=0x0 EPLE=0x1
+=== suspend s2idle 15s ===
+rtcwake: wakeup from "mem" using /dev/rtc0 at Mon Oct 26 11:07:28 2026
+=== post 2026-10-26T19:07:29+08:00 ===
+profile=cool CEFM=0x0 EPLE=0x1

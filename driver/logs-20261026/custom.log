@@ -1,0 +1,8 @@
+before: profile=performance CEFM=0x0 EPLE=0x0
+set passive+unlocked directly (SEFM 1, SEPL 0)
+  SEFM 1 -> 0xffff0500
+  SEPL 0 -> 0xffff0000
+after:  profile=custom CEFM=0x1 EPLE=0x0
+class:  custom
+restore performance via ABI
+after:  profile=performance CEFM=0x0 EPLE=0x0

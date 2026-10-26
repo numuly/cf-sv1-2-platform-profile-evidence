@@ -1,0 +1,22 @@
+RFC v4 base + CF-SV1-2 entry — integrity checks, 2026-10-26
+
+v4 text source: https://www.spinics.net/lists/platform-driver-x86/msg67802.html
+v4 Message-ID: 20261025191300.1259541-1-alexyeo362@gmail.com
+
+base file (Linux v7.3 drivers/platform/x86/panasonic-laptop.c):
+  blob 19d194ff37ca9333157b66c45228669d7c1ede94
+  expected pre-image from the v4 diff: 19d194ff37ca9333157b66c45228669d7c1ede94
+
+after RFC v4:
+  blob e929d2527fb9e04b0f9fed1abae0ed0684d9698c
+  matches the post-image in the v4 diff header
+
+after the 8-line CF-SV1-2 DMI entry:
+  blob 69d255a0c3b07241290359bcdc7e0caf92c9804c
+
+patch applies to a clean v4 tree with: git apply --check (clean)
+
+build: make -C /lib/modules/7.2.9+deb13-amd64/build M=<dir> modules
+  result: OK, no compiler warnings in the captured output
+  vermagic: 7.2.9+deb13-amd64 SMP preempt mod_unload
+  depends:  sparse-keymap,video

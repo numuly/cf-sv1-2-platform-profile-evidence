@@ -1,51 +1,46 @@
-From c7636af72db7a4c649914ff3fe9bb67b184a16d9 Mon Sep 17 00:00:00 2001
+From cb3f17d31b49dd35b7ead039f6b1a6cefe71230b Mon Sep 17 00:00:00 2001
 From: Wu Zhipeng <zepwu@foxmail.com>
-Date: Mon, 12 Oct 2026 11:35:21 +0800
-Subject: [PATCH] platform/x86: panasonic-laptop: add platform_profile quirk
- for CF-SV1-2
+Date: Mon, 26 Oct 2026 19:05:00 +0800
+Subject: [PATCH] platform/x86: panasonic-laptop: Add CF-SV1-2 platform_profile
+ entry
 
-Add a platform_profile quirk for the Panasonic CF-SV1-2 (Let's Note,
-Tiger Lake), verified on hardware under Linux with BIOS V2.00L23; the
-later V2.00L24 update leaves every firmware table byte-identical.  The
-firmware exposes the same fan and TDP policy controls as CF-SR4 and the
-boolean mapping is identical (COOL active+locked, QUIET passive+locked,
-PERFORMANCE active+unlocked), so the model reuses quirk_cf_sr4 and only
-adds a DMI entry; the remaining fan/TDP combination is reported as
-CUSTOM by get().
+The CF-SV1-2 exposes the same CEFM/EPLE fan/TDP policy pair as the
+CF-SR4, with the same boolean mapping (cool = active + locked, quiet =
+passive + locked, performance = active + unlocked), so reuse
+quirk_cf_sr4 and add only a DMI entry.  The remaining combination
+(passive + unlocked) is reported as CUSTOM by get().
 
-Measured on the unit under EPP=performance (turbo on, no userspace fan
-governor; 3 interleaved rounds x 4 EC states, 60 s sysbench cpu --threads=8
-with 1 Hz RAPL sampling), the TDP toggle is the power lever and the fan
-toggle a temperature lever: active+locked sustains 9.96 W at 50 C,
-quiet+locked 9.95 W at 60 C, active+unlocked 26.32 W at 84 C and
-quiet+unlocked 25.63 W at 88 C.  Locking the TDP therefore holds the
-package at about 10 W against about 26 W unlocked, while the fan curve
-moves the peak temperature by about 10 C when locked and 4 C when
-unlocked, at essentially equal package power.
+Measured on the unit (BIOS V2.00L24, i5-1145G7, EPP=performance, turbo
+on, no userspace fan governor): the TDP toggle is the power lever (~10 W
+locked vs ~26 W unlocked) and the fan toggle is a temperature lever at
+essentially equal package power (active+locked 9.96 W / 50 C,
+passive+locked 9.95 W / 60 C, active+unlocked 26.32 W / 84 C).
 
-Model-specific behaviour is noted here because it does not generalise
-across models: the SEFM curve-byte values are swapped against CF-SR4
-(CF-SV1: 0x00 cool / 0x05 quiet / 0x02 in S0i3), EPLE/SEPL select an IETM
-table PL rather than a fixed TDP cap, _FST[1] is a fan setpoint and not
-RPM, a nonzero TFN1._FSL override masks a profile change until it is
-released, and the EC comes up at boot with CEFM=0 / EPLE=1
-(active + locked / COOL).
+Notes for this model, because they do not generalise: the SEFM curve
+bytes behind the boolean differ from CF-SR4 (0x00 cool / 0x05 quiet /
+0x02 in S0i3), EPLE/SEPL select an IETM table PL rather than a fixed TDP
+cap, _FST[1] is a fan setpoint and not RPM, a nonzero TFN1._FSL override
+masks a profile change until released, and the EC boots at CEFM=0 /
+EPLE=1 (active + locked / COOL).
 
+Alex Yeo confirmed the cool/quiet/performance mapping for this model on
+2026-10-26.
+
+Link: https://lore.kernel.org/platform-driver-x86/20261025191300.1259541-1-alexyeo362@gmail.com/
+Link: https://github.com/numuly/cf-sv1-2-platform-profile-evidence
 Signed-off-by: Wu Zhipeng <zepwu@foxmail.com>
 ---
-Starting point against RFC v3, not for direct merge.  Per Ilpo's
-2026-10-16 review this reuses the existing quirk_cf_sr4 struct and only
-adds a DMI entry instead of declaring a duplicate struct.  The post-image
-index line is omitted on purpose; it will be regenerated when the series
-is rebased onto v4.
----
+Applies on top of RFC v4 (20261025191300.1259541-1-alexyeo362@gmail.com);
+the pre-image is the v4 post-image.
+
  drivers/platform/x86/panasonic-laptop.c | 8 ++++++++
  1 file changed, 8 insertions(+)
 
 diff --git a/drivers/platform/x86/panasonic-laptop.c b/drivers/platform/x86/panasonic-laptop.c
+index e929d2527fb9e04b0f9fed1abae0ed0684d9698c..69d255a0c3b07241290359bcdc7e0caf92c9804c 100644
 --- a/drivers/platform/x86/panasonic-laptop.c
 +++ b/drivers/platform/x86/panasonic-laptop.c
-@@ -355,6 +355,14 @@ static const struct dmi_system_id pcc_profile_quirks[] = {
+@@ -329,6 +329,14 @@ static const struct dmi_system_id pcc_profile_quirks[] = {
  		},
  		.driver_data = &quirk_cf_sr4,
  	},
@@ -61,5 +56,5 @@ diff --git a/drivers/platform/x86/panasonic-laptop.c b/drivers/platform/x86/pana
  		.ident = "Panasonic Corporation CFQV9-1",
  		.matches = {
 -- 
-2.53.0
+2.47.3
 

@@ -1,0 +1,4 @@
+=== ABI rejects custom / max-power ===
+custom -> rejected: /bin/bash: line 1: echo: write error: Invalid argument
+max-power -> rejected: /bin/bash: line 1: echo: write error: Operation not supported
+current: cool

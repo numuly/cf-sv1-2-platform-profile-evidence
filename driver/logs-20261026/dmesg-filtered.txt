@@ -1,0 +1,8 @@
+[    0.000000] DMI: Panasonic Corporation CFSV1-2/CFSV1-2H, BIOS V2.00L24 08/27/2026
+[    0.959776] integrity: Loaded X.509 cert 'Panasonic Corporation db CA 2013: c908933fc0f17992c92c58ba78941cbd42d95488'
+[    4.280911] input: Panasonic Laptop Support as /devices/virtual/input/input15
+[  838.409911] input: Panasonic Laptop Support as /devices/virtual/input/input22
+[  906.628202] PM: suspend entry (s2idle)
+[  914.185520] PM: suspend exit
+[  942.655807] PM: suspend entry (s2idle)
+[  960.003832] PM: suspend exit

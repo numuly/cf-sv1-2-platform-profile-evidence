@@ -1,107 +1,140 @@
 # Test report — patched driver built and loaded on CF-SV1-2
 
-Date: 2026-10-16. This is a *build + load + read-back* test of the RFC v3
-patch with the CF-SV1-2 quirk applied, on a fresh Ubuntu install — not yet a
-full measurement campaign.
+Date: 2026-10-26. Build + load + round-trip test of **RFC v4** of Alex Yeo's
+`panasonic-laptop` platform_profile series with the CF-SV1-2 DMI entry
+(`cf-sv1-platform_profile-quirk.patch`) applied on top. This supersedes the
+v3 test in `archive/v3-20261016.md`.
+
+The entry was requested by Alex on 2026-10-26: the SV1 uses the same
+`CEFM`/`EPLE` boolean mapping as the CF-SR4, so it reuses `quirk_cf_sr4`
+(`cool` = active + locked, `quiet` = passive + locked, `performance` =
+active + unlocked) and only adds a DMI entry. The fourth combination
+(passive + unlocked) is `custom`.
 
 ## Environment
 
 ```
-machine   Panasonic CF-SV1-2 (DMI CFSV1-2), i5-1145G7, BIOS V2.00L23
-kernel    7.3.0-9-generic (Ubuntu 26.10), gcc 15.3.0
-headers   linux-headers-7.3.0-9-generic ; source linux-source-7.3.0
-config    CONFIG_PANASONIC_LAPTOP=m, CONFIG_ACPI_PLATFORM_PROFILE=y, Secure Boot off
+machine   Panasonic CF-SV1-2 (DMI CFSV1-2), i5-1145G7
+BIOS      V2.00L24 (2026-08-27)
+kernel    7.2.9+deb13-amd64 (Debian 13), gcc 14.2.0
+headers   linux-headers-7.2.9+deb13-amd64
+config    CONFIG_PANASONIC_LAPTOP=m, CONFIG_ACPI_PLATFORM_PROFILE=y,
+          Secure Boot off
+tools     acpi-call 1.2.2 (dkms) for the CEFM/EPLE cross-checks
+state     AC power, no thermald, no userspace governor, TFN1._FSL = 0
+suspend   s2idle only (/sys/power/mem_sleep = [s2idle]; no deep S3)
 ```
 
 ## Base compatibility
 
-RFC v3 patches `drivers/platform/x86/panasonic-laptop.c` with pre-image blob
-`19d194ff37ca`. The file in `linux-source-7.3.0` hashes to
+RFC v4 patches `drivers/platform/x86/panasonic-laptop.c` from pre-image blob
+`19d194ff37ca..` to post-image `e929d2527fb9..`. The Linux v7.3 file hashes to
 
 ```
 19d194ff37ca9333157b66c45228669d7c1ede94
 ```
 
-i.e. identical — v3 applies cleanly, and the quirk applies on top with no fuzz.
+i.e. it is the exact pre-image. The v4 text used here was taken from the
+archived message (`msg67802` on spinics, Message-ID
+`20261025191300.1259541-1-alexyeo362@gmail.com`) and both blob hashes match,
+so the applied code is byte-identical to the posted v4.
 
-> Note (2026-10-18): the quirk has since been restructured per Ilpo's review to
-> reuse `quirk_cf_sr4` and only add a DMI entry (same boolean mapping). The
-> build/load test below was run with the earlier revision; the mapping and the
-> driver-side behaviour are unchanged.
+With the 8-line CF-SV1-2 entry the post-image is
+
+```
+69d255a0c3b07241290359bcdc7e0caf92c9804c
+```
+
+The entry applies to a clean v4 tree with `git apply --check` and no fuzz.
+lore's HTTP side is behind Anubis and the local NNTP client needs Python ≤ 3.12,
+so the archive copy linked above is the check used for the v4 text.
 
 ## Recipe
 
 ```sh
-# 1. source
-apt-get install -y linux-source-7.3.0
-tar -xjf /usr/src/linux-source-7.3.0.tar.bz2 -C /tmp/kern \
-    --wildcards '*/drivers/platform/x86/panasonic-laptop.c'
-
-# 2. apply RFC v3 (extract the .c hunk from the v3 message) then the quirk
+# 1. base: Linux v7.3 drivers/platform/x86/panasonic-laptop.c
 mkdir -p build/drivers/platform/x86
-cp /tmp/kern/linux-source-7.3.0/drivers/platform/x86/panasonic-laptop.c \
-   build/drivers/platform/x86/
-( cd build && patch -p1 < v3-panasonic-laptop.diff )
+cp .../panasonic-laptop.c build/drivers/platform/x86/
+( cd build && patch -p1 < v4-panasonic-laptop.diff )
 ( cd build && patch -p1 < ../driver/cf-sv1-platform_profile-quirk.patch )
 
-# 3. out-of-tree build: the .c MUST sit next to the Makefile at the module root
+# 2. out-of-tree build: the .c MUST sit next to the Makefile at the module root
 cp build/drivers/platform/x86/panasonic-laptop.c build/
 printf 'obj-m += panasonic-laptop.o\n' > build/Makefile
 make -C /lib/modules/$(uname -r)/build M=$PWD/build modules
 
-# 4. swap it in
+# 3. swap it in (reversible: rmmod + modprobe restores the stock module)
 rmmod panasonic_laptop
 insmod build/panasonic-laptop.ko
 ```
 
-Gotchas:
-
-- Put the `.c` at the module root, next to the `Makefile` — leaving it in
-  `drivers/platform/x86/` makes kbuild fail with
-  `No rule to make target 'panasonic-laptop.o'`.
-- `pahole`/compiler-version warnings from kbuild are harmless here.
-- `platform_profile_register`/`…_remove`/`devm_platform_profile_register` are
-  `EXPORT_SYMBOL_GPL` in this kernel, so a module can use them.
+Gotchas are unchanged from the v3 report: the `.c` must be at the module root,
+and `pahole`/compiler-version warnings from kbuild are harmless.
 
 ## Results
-
-Module: `vermagic 7.3.0-9-generic SMP preempt mod_unload modversions`,
-`srcversion 98A69AA2E1988FF2D077B4A`.
 
 ```
 $ cat /sys/firmware/acpi/platform_profile_choices
 cool quiet performance
+$ cat /sys/class/platform-profile/platform-profile-0/choices
+cool quiet performance
 ```
 
 `get()`/`set()` round-trip, cross-checked against the EC methods directly
-(`CEFM` fan, `EPLE` TDP; read via `acpi_call`):
+(`CEFM` fan, `EPLE` TDP; read via `acpi_call`). Both the legacy
+`/sys/firmware/acpi/…` frontend and the class device
+`/sys/class/platform-profile/platform-profile-0/…` were read; both write
+paths were exercised.
 
-| set target | `platform_profile` | `CEFM` | `EPLE` |
-|---|---|---|---|
-| `quiet` | quiet | 0x1 (passive) | 0x1 (locked) |
-| `cool` | cool | 0x0 (active) | 0x1 (locked) |
-| `performance` | performance | 0x0 (active) | 0x0 (unlocked) |
+| set target | legacy | class | `CEFM` | `EPLE` |
+|---|---|---|---|---|
+| `cool` | cool | cool | 0x0 (active) | 0x1 (locked) |
+| `quiet` | quiet | quiet | 0x1 (passive) | 0x1 (locked) |
+| `performance` | performance | performance | 0x0 (active) | 0x0 (unlocked) |
+| write `quiet` via class | quiet | quiet | 0x1 | 0x1 |
 
-Edge case — an unmapped combination (`SEFM 1` + `SEPL 0`, i.e.
-passive + unlocked, written straight to the EC) is reported as:
+Unmapped combination — `SEFM 1` + `SEPL 0` (passive + unlocked) written
+straight to the EC:
 
 ```
 CEFM=0x1 EPLE=0x0  ->  platform_profile = custom
 ```
 
-which matches the RFC's "CUSTOM is returned when the current state is not
-recognised". No errors in `dmesg` on load or profile changes.
+The ABI itself refuses `custom` (`EINVAL`) and `max-power` (`EOPNOTSUPP`), so
+the only way to reach that state is a direct EC write, as expected.
 
-## Not yet done
+Suspend/resume (s2idle; the machine has no deep S3):
 
-- rebuild + reload the restructured quirk.  The build/load/round-trip result
-  above predates the restructure.  The *current* patch
-  (`.driver_data = &quirk_cf_sr4` + DMI entry, per Ilpo's review) has only had
-  its hunk checked for apply — it has not been compiled, loaded, or had the
-  `cool`/`quiet`/`performance` <-> `CEFM`/`EPLE` round-trip and the unmapped ->
-  `custom` case re-run on hardware.  Redo this on RFC v4.
-- the quirk rebased onto RFC v4;
-- the in-thread `Tested-by:` mail once v4 is available.
+| state before | cycle | after resume | `CEFM`/`EPLE` after | write after resume |
+|---|---|---|---|---|
+| `quiet` | s2idle, cut short by a wakeup event (~8 s) | quiet | 0x1 / 0x1 | performance works |
+| `cool` | s2idle, 15 s RTC wake | cool | 0x0 / 0x1 | — |
 
-(The corrected AC matrix, thermald A/B, Windows comparison and wall-meter
-input power are all done — see `../linux/`.)
+So `get()` after resume is the firmware state, unchanged by the cycle, and a
+profile write after resume still reaches the EC. `dmesg` has no errors on
+module load or on profile changes; only the expected input-device line.
+
+## Evidence files
+
+- `logs-20261026/roundtrip.log` — choices + set/get + CEFM/EPLE table
+- `logs-20261026/custom.log` — passive+unlocked → `custom`, then ABI restore
+- `logs-20261026/abi-reject.log` — `custom` / `max-power` rejected
+- `logs-20261026/postresume-15s.log`, `postresume-early-wake.log`
+- `logs-20261026/verification.txt` — blob hashes, patch apply, build
+- `logs-20261026/environment.txt`, `dmesg-filtered.txt`
+
+## Caveats
+
+- The series is based on Linux v7.3; this test runs the v7.3 driver source
+  on Debian's 7.2.9 kernel (out-of-tree module). The driver code is v4
+  verbatim; only the host kernel differs.
+- Only s2idle is available on this unit, so "post-resume" above means s2idle,
+  not S3.
+- v4 is still an RFC. If a v5 changes the DMI table or the quirk shape, this
+  8-line entry needs a respin.
+- v4's cover letter still says `COOL (SR4 only)` and "for every model except
+  the SR4, only balanced and performance are defined"; with SV1 added both
+  statements are stale. The code is unaffected; the cover should be updated
+  in v5.
+- The historical v3 build/load result (2026-10-16) is in
+  `archive/v3-20261016.md`; it used the earlier duplicate-struct revision.

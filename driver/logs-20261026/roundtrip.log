@@ -1,0 +1,16 @@
+choices(legacy): cool quiet performance
+choices(class):  cool quiet performance
+
+target         legacy         class          CEFM     EPLE    
+cool           cool           cool           0x0      0x1     
+quiet          quiet          quiet          0x1      0x1     
+performance    performance    performance    0x0      0x0     
+
+write via class path: quiet
+class quiet    quiet          quiet          0x1      0x1     
+
+unmapped: SEFM 1 + SEPL 0
+not callednot calledcustom         quiet          quiet          0x1      0x1     
+
+restore performance
+performance    performance    performance    0x0      0x0     
